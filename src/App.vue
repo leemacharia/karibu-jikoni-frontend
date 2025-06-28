@@ -14,4 +14,8 @@ import Footer from './components/Footer.vue';
 </v-app>
  
 </template>
-
+<style scoped>
+.main-content {
+  min-height: calc(100vh - 64px - 120px); /* adjust for header + footer height */
+}
+</style>

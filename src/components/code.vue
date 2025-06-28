@@ -342,3 +342,111 @@ const slides = [
     Get Started
   </v-btn>
 </div>
+
+
+
+
+
+<template>
+     <v-app-bar app color="green-darken-4" >
+    <v-app-bar-title>KARIBU JIKONI</v-app-bar-title>
+        <v-btn to="/" color="orange-darken-4"> Home</v-btn>
+        <v-btn to="/products" color="orange-darken-4"> Products</v-btn>
+        <v-btn to="/checkout" color="orange-darken-4"> Check Out</v-btn>
+       <v-btn to="/subscription" color="orange-darken-4"> Subscription</v-btn>
+        <v-btn to="/aboutus" color="orange-darken-4"> About Us</v-btn>
+        <v-btn to="/contactus" color="orange-darken-4"> Contact Us</v-btn>
+        <v-btn to="/signup" color="orange-darken-4"> Sign Up</v-btn>
+        <v-btn to="/login" color="orange-darken-4"> Log In</v-btn>
+        
+        
+</v-app-bar>
+
+</template>
+
+
+<v-btn to="/checkout" color="orange-darken-4" class="mx-2">Check Out</v-btn>
+
+<v-row v-if="cart.items.length">
+      <v-col cols="12" md="6" v-for="item in cart.items" :key="item.name">
+        <v-card class="mb-4">
+          <v-img :src="item.image" height="150px" cover></v-img>
+          <v-card-title>{{ item.name }}</v-card-title>
+          <v-card-subtitle>KES {{ item.price }} each</v-card-subtitle>
+
+          <v-card-actions class="justify-between">
+            <div class="flex items-center space-x-2">
+              <v-btn icon @click="cart.decreaseQuantity(item)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+              <span>{{ item.quantity }}</span>
+              <v-btn icon @click="cart.increaseQuantity(item)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </div>
+            <div class="font-bold">Total: KES {{ item.quantity * item.price }}</div>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+
+
+
+<v-menu
+  v-model="cartMenu"
+  location="bottom end"
+  offset-y
+  :close-on-content-click="false"
+>
+  <template #activator="{ props }">
+  <div class="cart-icon-wrapper" v-bind="props">
+    <v-btn icon color="orange-darken-4">
+      <v-icon>mdi-cart</v-icon>
+    </v-btn>
+    <span
+      v-if="cart.items.length"
+      class="cart-badge-attached"
+    >
+      {{ cart.items.reduce((sum, item) => sum + item.quantity, 0) }}
+    </span>
+  </div>
+</template>
+
+  <v-card width="300">
+    <v-card-title class="text-h6">Your Cart</v-card-title>
+    <v-divider></v-divider>
+
+    <v-list>
+      <v-list-item
+        v-for="(item, index) in cart.items"
+        :key="index"
+        class="px-4"
+      >
+        <v-list-item-content>
+          <v-list-item-title>{{ item.name }}</v-list-item-title>
+          <v-list-item-subtitle>
+            {{ item.quantity }} × KES {{ item.price }}
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-list-item v-if="cart.items.length === 0" class="px-4">
+        <v-list-item-content>
+          <v-list-item-title>No items in cart</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+
+ <v-card-actions class="justify-center">
+  <router-link to="/checkout" @click="cartMenu = false">
+    <v-btn color="orange-darken-4" variant="tonal">
+      Proceed to Checkout
+          </v-btn>
+       </router-link>
+     </v-card-actions>
+  </v-card>
+</v-menu>
+
+
+
+

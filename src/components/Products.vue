@@ -44,6 +44,7 @@ export default {
         },
         {
           name: 'Butter Naan Pack',
+          slug: 'butter-naan',
           price: 320,
           dietary: ['Vegetarian'],
           image: '../../public/Images/products/butter naan.jpeg'

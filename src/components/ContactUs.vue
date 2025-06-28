@@ -29,41 +29,61 @@ function saveData(){
     }
 }
 </script>
-
 <template>
-
-  <!-- Application Form -->
-   <v-container>
-    <v-row>
-        <v-col md="6">
-            <v-text-field label="First Name" v-model="firstName"> </v-text-field>
+  <div
+    style="
+      background: url('../../public/Images/food\ 2.jpg') center/cover no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      padding-bottom: 60px; /* space for fixed footer */
+    "
+  >
+    <!-- Contact form -->
+    <div
+      style="
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        padding: 2rem;
+        border-radius: 12px;
+        margin-left: 5vw;
+        max-width: 600px;
+        width: 90%;
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      "
+    >
+      <h2 class="text-h5 mb-4">Get in Touch</h2>
+      <v-row dense>
+        <v-col cols="6">
+          <v-text-field label="First" v-model="firstName" dense hide-details></v-text-field>
         </v-col>
-        <v-col md="6">
-            <v-text-field label="Last Name" v-model="lastName"> </v-text-field>
+        <v-col cols="6">
+          <v-text-field label="Last" v-model="lastName" dense hide-details></v-text-field>
         </v-col>
-    </v-row>
-
-    <v-row>
-        <v-col md="6">
-            <v-text-field label="Email Address"v-model="emailAddress" > </v-text-field>
+        <v-col cols="6">
+          <v-text-field label="Email" v-model="emailAddress" dense hide-details></v-text-field>
         </v-col>
-        <v-col md="6">
-            <v-text-field label="Phone Number" v-model="phoneNumber"> </v-text-field>
+        <v-col cols="6">
+          <v-text-field label="Phone" v-model="phoneNumber" dense hide-details></v-text-field>
         </v-col>
-    </v-row>
-
-    <v-row>
-        <v-col>
-            <v-text-field label="Subject" v-model="subject"> </v-text-field>
+        <v-col cols="12">
+          <v-text-field label="Subject" v-model="subject" dense hide-details></v-text-field>
         </v-col>
-        </v-row>
-        <v-row>
-        <v-col>
-            <v-textarea label="Message" v-model="message" > </v-textarea>
+        <v-col cols="12">
+          <v-textarea label="Message" v-model="message" rows="3" dense hide-details></v-textarea>
         </v-col>
-    </v-row>
-<v-row>
-    <v-btn block color="orange" @click="saveData()">Submit</v-btn>
-</v-row>
-   </v-container>
+        <v-col cols="12">
+          <v-btn block color="orange-darken-4" @click="saveData()">Submit</v-btn>
+        </v-col>
+      </v-row>
+    </div>
+  </div>
+   
 </template>

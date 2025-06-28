@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AboutUs from '../components/AboutUs.vue'
 import ContactUs from '../components/ContactUs.vue'
 import CheckOut from '../components/CheckOut.vue'
 import Subscription from '../views/Subscription.vue'
@@ -14,11 +13,7 @@ const router = createRouter({
   routes: [
     
     
-    {
-      path: '/aboutus',
-      name: 'aboutus',
-      component: AboutUs,
-    },
+    
     {
       path: '/contactus',
       name: 'contactus',
@@ -43,6 +38,12 @@ const router = createRouter({
       name: 'products',
       component: Products,
     },
+    {
+  path: '/products/:slug',
+  name: 'product-detail',
+  component: () => import('../components/ProductDetail.vue'),
+},
+
     {
       path: '/login',
       name: 'login',

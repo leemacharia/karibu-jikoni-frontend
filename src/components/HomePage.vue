@@ -3,9 +3,52 @@ const slides = [
   { image: '/Images/food 1.jpg' },
   { image: '/Images/food 2.jpg' },
   { image: '/Images/food 3.jpg' },
-  { image: '/Images/food 4.jpg' }
+  { image: '/Images/food 4.jpg' }, // ✅ Add a comma here
 ];
+
+// ✅ Now promoCards is outside of slides
+const promoCards = [
+  { 
+    title: "🔥 Deal of the Day",
+    subtitle: "Only today — save 20%!",
+    description: "Enjoy our delicious Butter Naan Pack with a 20% discount. Only today!",
+    cta: "Grab Naan Deal",
+    slug: "butter-naan",
+  },
+  {
+    title: "🥗 Healthy Choice Promo",
+    subtitle: "Limited-time bundle",
+    description: "Get 3 plant-based meal packs and pay for only 2. Perfect for meal preppers!",
+    cta: "See Bundle",
+    slug: "products", // fallback
+  },
+  {
+    title: "🎉 First-Time Offer",
+    subtitle: "New customers only",
+    description: "Enjoy 15% off your first subscription plan. Use code: WELCOME15",
+    cta: "Subscribe Now",
+    slug: "subscription",
+  },
+];
+
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function handleDealClick(deal) {
+  if (deal.slug === 'butter-naan') {
+    router.push('/products/butter-naan')
+  } else if (deal.slug === 'subscription') {
+    router.push('/subscription')
+  } else {
+    router.push('/products')
+  }
+}
+
+
 </script>
+
+
 
 <template>
   <div style="position: relative; height: 70vh;">
@@ -40,45 +83,80 @@ const slides = [
     </div>
   </div>
 
+  <!-- About Us Section -->
+<v-container class="my-10">
+  <v-row align="center" justify="center">
+    <v-col cols="12" md="5">
+      <v-img
+        src="../../public/Images/products/chicken 2.jpg"
+        alt="About Karibu Jikoni"
+        aspect-ratio="4/3"
+        cover
+        class="rounded-lg elevation-4"
+      ></v-img>
+    </v-col>
+    <v-col cols="12" md="6">
+      <h2 class="text-h5 font-weight-bold mb-4">About Karibu Jikoni</h2>
+      <p class="mb-4 text-body-1">
+        Karibu Jikoni was founded to simplify your mealtime experience. We deliver ready-to-eat and pre-prepped meals tailored to your lifestyle—whether you're a student, a busy professional, or a parent looking to save time.
+      </p>
+      <p class="text-body-2 text-grey-darken-1">
+        Our commitment is to bring wholesome, flavorful food to your table without the stress of cooking from scratch. We believe food should nourish both body and soul—and we’re here to make it effortless.
+      </p>
+      <v-btn
+        class="mt-4"
+        color="green-darken-4"
+        variant="tonal"
+        to="/products"
+      >
+        Explore Our Meals
+      </v-btn>
+    </v-col>
+  </v-row>
+</v-container>
+
 
 
 <!-- latest from jitegemee-->
- <v-container>
-    <v-row>
-      <v-col cols="12" md="4">
-        <v-card
-          subtitle="Karibu Jikoni is transforming food convenience "
-          text="Say goodbye to takeout and tedious cooking. Karibu Jikoni brings pre-prepped, flavor-packed meals straight to your fridge. Whether you're a student, professional, or parent, our ready-to-cook options fit your lifestyle. We're not just delivering food — we're delivering freedom."
-          title="Reimagining Mealtime"
-          color="green-darken-4"
-        ></v-card>
-      </v-col>
-      <v-col cols="12" md="4">
-        <v-card color="orange-darken-4">
-          <template v-slot:title>
-            Plans that Fit Your Plate
-          </template>
-          <template v-slot:subtitle>
-            Choose daily, weekly, or monthly — your kitchen, your rules
-          </template>
-          <template v-slot:text>
-            With Karibu Jikoni’s subscription model, you can enjoy fresh, high-quality meals without the daily hassle of shopping or prepping. Select a plan that matches your appetite, schedule, and budget — and pause or adjust anytime. Simplicity never tasted this good.
-          </template>
-        </v-card>
-      </v-col>
-      <v-col cols="12" md="4">
-        <v-card color="green-darken-4">
-          <v-card-item>
-            <v-card-title>More Than a Meal — It’s a Smart Choice</v-card-title>
-            <v-card-subtitle>Save hours every week and reduce food waste.</v-card-subtitle>
-          </v-card-item>
-          <v-card-text>
-            Karibu Jikoni cuts your kitchen time in half while keeping your wallet happy. No more wasted ingredients or impulsive takeout spending. Enjoy gourmet-style meals at a fraction of the cost — without compromising on flavor or freshness.
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+ <!-- Promotions Section -->
+<v-container class="my-10">
+  <h2 class="text-h5 font-weight-bold text-center mb-6">Today's Specials & Deals</h2>
+  <v-row dense>
+    <v-col
+      v-for="(deal, index) in promoCards"
+      :key="index"
+      cols="12"
+      sm="6"
+      md="4"
+    >
+         <v-card
+        class="pa-4 elevation-3 promo-card"
+       style="border-radius: 12px; cursor: pointer;"
+       @click="handleDealClick(deal)"
+       >
+        <v-card-title class="font-weight-bold mb-1">
+          {{ deal.title }}
+        </v-card-title>
+        <v-card-subtitle class="text-body-2 text-grey-darken-1 mb-2">
+          {{ deal.subtitle }}
+        </v-card-subtitle>
+        <v-card-text class="text-body-1 mb-2">
+          {{ deal.description }}
+        </v-card-text>
+        <v-btn
+          v-if="deal.cta"
+          color="orange-darken-4"
+          size="small"
+          variant="tonal"
+          @click="$router.push('/products')"
+        >
+          {{ deal.cta }}
+        </v-btn>
+      </v-card>
+    </v-col>
+  </v-row>
+</v-container>
+
 
 
 
@@ -106,3 +184,18 @@ const slides = [
     </v-row>
   </v-container>
 </template>
+
+<style scoped>
+.promo-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  background-color: rgba(255, 165, 0, 0.05); /* light orange tint */
+}
+
+.promo-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 165, 0, 0.12); /* slightly darker tint on hover */
+}
+
+</style>
+

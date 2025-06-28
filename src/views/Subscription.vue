@@ -40,8 +40,19 @@ const plans = [
 </script>
 
 <template>
+  <div
+    style="
+      min-height: 100vh;
+      background-image: url('../../public/Images/food\ 1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    "
+    >
     <v-container class="py-12">
-    <h1 class="text-3xl font-bold text-center mb-8">Choose Your Meal Plan</h1>
+   <h1 class="text-3xl font-bold text-center mb-8" style="color: orange;">
+        Choose Your Meal Plan
+      </h1>
     <v-row justify="center" align="stretch">
       <v-col cols="12" sm="6" md="4" v-for="plan in plans" :key="plan.title">
         <v-card :elevation="plan.recommended ? 8 : 2" :color="plan.recommended ? 'deep-purple-lighten-5' : 'white'" class="h-100">
@@ -64,4 +75,5 @@ const plans = [
       </v-col>
     </v-row>
   </v-container>
+  </div>
 </template>
