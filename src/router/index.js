@@ -34,8 +34,8 @@ const router = createRouter({
       component: HomePage,
     },
     {
-      path: '/products',
-      name: 'products',
+      path: '/meals',
+      name: 'meals',
       component: Products,
     },
     {
